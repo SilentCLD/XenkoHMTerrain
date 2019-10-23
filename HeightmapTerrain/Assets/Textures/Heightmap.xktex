@@ -1,0 +1,10 @@
+!Texture
+Id: 2cbe1fb2-6e0d-4206-8996-1c4b4b5de01e
+SerializedVersion: {Xenko: 2.0.0.0}
+Tags: []
+Source: !file ../../Resources/Heightmap.png
+IsCompressed: false
+Type: !ColorTextureType
+    ColorKeyColor: {R: 255, G: 0, B: 255, A: 255}
+GenerateMipmaps: false
+IsStreamable: false
