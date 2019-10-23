@@ -9,6 +9,7 @@ using Xenko.Graphics;
 using Xenko.Input;
 using Xenko.Rendering;
 using Xenko.Rendering.Compositing;
+using HeightmapTerrain.Scripts.Utils;
 
 namespace HeightmapTerrain.Scripts
 {
@@ -181,7 +182,7 @@ namespace HeightmapTerrain.Scripts
                 indices,
                 GraphicsResourceUsage.Default
             );
-
+            
             _vertexBufferBinding = new VertexBufferBinding(vbo, VertexPositionNormalColor.Layout, vertices.Length);
             _indexBufferBinding = new IndexBufferBinding(ibo, is32Bit: true, count: indices.Length);
 
@@ -209,6 +210,10 @@ namespace HeightmapTerrain.Scripts
             };
 
             Entity.Add(_modelComponent);
+
+            // Bounding box for culling
+            _mesh.BoundingBox = Helpers.FromPoints(vertices);
+            _mesh.BoundingSphere = BoundingSphere.FromBox(_mesh.BoundingBox);
         }
 
         public override void Start()
