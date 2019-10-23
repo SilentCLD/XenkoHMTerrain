@@ -20,7 +20,7 @@ namespace HeightmapTerrain.Scripts
         public const int TERRAIN_SIZE = 514;
 
         // Min / Max height of the terrain
-        public const int MAX_HEIGHT = 256;
+        public const int MAX_HEIGHT = 100;
         public const int MIN_HEIGHT = 0;
 
         // How many vertices are in a strip (automatically set during initialize)
@@ -102,7 +102,15 @@ namespace HeightmapTerrain.Scripts
             {
                 for (int z = 0; z < _vertexCount; z++)
                 {
-                    vertices[vertexPointer++].Position.Y = heightValues[x + z * _vertexCount].R / 5.1f;
+                    float height = heightValues[x + z * _vertexCount].R / 3.1f;
+
+                    // TODO: Squash the values to be in range instead of just slicing the top off? ¯\_(ツ)_/¯
+                    if (height > MAX_HEIGHT)
+                        height = MAX_HEIGHT;
+                    else if (height < MIN_HEIGHT)
+                        height = MIN_HEIGHT;
+
+                    vertices[vertexPointer++].Position.Y = height;
                 }
             }
         }
