@@ -34,6 +34,9 @@ namespace HeightmapTerrain.Scripts
         private Mesh _mesh;
         private ModelComponent _modelComponent;
 
+        /// <summary>
+        /// Generates the vertex positions for the terrain
+        /// </summary>
         private void GenerateTerrainData()
         {
             // Setup our arrays
@@ -42,22 +45,14 @@ namespace HeightmapTerrain.Scripts
 
             // tmp
             Random random = new Random();
-            
+
             // Generate the vertex positions
             int vertexPointer = 0;
             for (int x = 0; x < VERTEX_COUNT; x++)
             {
                 for (int z = 0; z < VERTEX_COUNT; z++)
                 {
-                    // tmp set height values
-                    float height;
-                    if (x >= 45 && z >= 45 && x <= 75 && z <= 75)
-                        height = random.Next(20);
-                    else
-                        height = random.Next(2);
-
-                    vertices[vertexPointer].Position = new Vector3(x / ((float)VERTEX_COUNT - 1) * SIZE, height, z / ((float)VERTEX_COUNT - 1) * SIZE);
-                    vertices[vertexPointer].Normal = Vector3.UnitY;
+                    vertices[vertexPointer].Position = new Vector3(x / ((float)VERTEX_COUNT - 1) * SIZE, 0, z / ((float)VERTEX_COUNT - 1) * SIZE);
                     vertices[vertexPointer].Color = new Color(random.Next(2), random.Next(2), random.Next(2));
 
                     vertexPointer++;
@@ -74,6 +69,7 @@ namespace HeightmapTerrain.Scripts
                     int topRight = x + (z + 1) * VERTEX_COUNT + 1;
                     int bottomLeft = x + z * VERTEX_COUNT;
                     int bottomRight = x + z * VERTEX_COUNT + 1;
+
                     indices[indexPointer++] = topLeft;
                     indices[indexPointer++] = bottomRight;
                     indices[indexPointer++] = bottomLeft;
@@ -81,6 +77,53 @@ namespace HeightmapTerrain.Scripts
                     indices[indexPointer++] = topRight;
                     indices[indexPointer++] = bottomRight;
                 }
+            }
+        }
+
+        /// <summary>
+        /// Calculates the Height of each vertex from the supplied heightmap
+        /// </summary>
+        private void CalculateHeights()
+        {
+            // TODO: Calculate from heightmap
+
+            // tmp
+            Random random = new Random();
+            for (int i = 0; i < vertices.Length; i++)
+            {
+                // tmp set height values
+                float height = random.Next(4, 10); ;
+
+                vertices[i].Position.Y = height;
+            }
+        }
+
+        /// <summary>
+        /// Calculates the normals of each vertex
+        /// </summary>
+        private void CalculateNormals()
+        {
+            for (int i = 0; i < indices.Length / 3; i++)
+            {
+                // Get the indices of the 3 vertices that make up the triangle
+                int vertA = indices[i * 3];
+                int vertB = indices[i * 3 + 1];
+                int vertC = indices[i * 3 + 2];
+
+                // Cross them together to produce the normal
+                Vector3 normal = Vector3.Cross(vertices[vertC].Position - vertices[vertA].Position, vertices[vertB].Position - vertices[vertA].Position);
+                normal.Normalize();
+
+                // Add the computed normal to the vertices
+                vertices[vertA].Normal += normal;
+                vertices[vertB].Normal += normal;
+                vertices[vertC].Normal += normal;
+            }
+
+            // Normalize incase any vector is > 1
+            for (int i = 0; i < vertices.Length; i++)
+            {
+                vertices[i].Normal.Normalize();
             }
         }
 
@@ -100,7 +143,7 @@ namespace HeightmapTerrain.Scripts
 
             _vertexBufferBinding = new VertexBufferBinding(vbo, VertexPositionNormalColor.Layout, vertices.Length);
             _indexBufferBinding = new IndexBufferBinding(ibo, is32Bit: true, count: indices.Length);
-            
+
             _mesh = new Mesh()
             {
                 Draw = new MeshDraw()
@@ -130,12 +173,11 @@ namespace HeightmapTerrain.Scripts
         public override void Start()
         {
             this._material = Content.Load<Material>("TerrainMat");
-            
-            GenerateTerrainData();
-            // TODO: Set heights from heightmap
-            // TODO: Generate normals
-            CreateMesh();
 
+            GenerateTerrainData();
+            CalculateHeights();
+            CalculateNormals();
+            CreateMesh();
 
             // tmp
             Game.Window.AllowUserResizing = true;
