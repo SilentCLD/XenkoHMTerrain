@@ -1,0 +1,154 @@
+!SceneAsset
+Id: 0ec8e81e-910b-4e5e-a4b7-a123f4ae039a
+SerializedVersion: {Xenko: 3.1.0.1}
+Tags: []
+ChildrenIds: []
+Offset: {X: 0.0, Y: 0.0, Z: 0.0}
+Hierarchy:
+    RootParts:
+        - ref!! d0faef56-4249-4cbb-a2c0-71e6c03e3181
+        - ref!! 3d21abd7-3ed1-445e-a9bd-bce041d9233c
+        - ref!! ae943b98-0e8f-4e82-af43-01af6aa1d43d
+        - ref!! da503525-d1d2-406c-a3e4-4468fd7f6a4f
+        - ref!! 7c815bc5-d8c9-46e4-938a-c45bef1644cd
+        - ref!! 01425968-84df-44c5-9e30-e5eb40ac01f4
+        - ref!! f682726a-044e-44b1-aa03-4001bb5cf9ac
+        - ref!! e161f07e-9e81-496d-b86b-28672896da90
+    Parts:
+        -   Folder: null
+            Entity:
+                Id: 01425968-84df-44c5-9e30-e5eb40ac01f4
+                Name: Cube
+                Components:
+                    73b455a73014580b14240e904ec0f631: !TransformComponent
+                        Id: f55f24ef-9a08-4c1f-9f39-5014ed8432fa
+                        Position: {X: 127.0, Y: 0.0, Z: 0.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    305f4d2d0b1bc26bf4f7dbddf2f1a730: !ModelComponent
+                        Id: 77440b9d-3516-4d2c-a48a-6511b11a4967
+                        Model: 3f8100fe-b5a1-47f3-8fe5-7242807ed651:Cube
+                        Materials: {}
+        -   Entity:
+                Id: 3d21abd7-3ed1-445e-a9bd-bce041d9233c
+                Name: Directional light
+                Components:
+                    cc12e31ec53b13eb612ae25f197acfc4: !TransformComponent
+                        Id: 2e70fa18-b23a-4a05-9b11-2ef434c13ba2
+                        Position: {X: 0.0, Y: 2.0, Z: 0.0}
+                        Rotation: {X: 1.131334E-08, Y: -0.9659258, Z: -0.258819044, W: -4.222196E-08}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    c243023ae4ce65ceb14872f4d51d7700: !LightComponent
+                        Id: 49fc1c4d-402d-44b5-b11d-231ab0f9ddb2
+                        Type: !LightDirectional
+                            Color: !ColorRgbProvider
+                                Value: {R: 1.0, G: 1.0, B: 1.0}
+                            Shadow:
+                                Enabled: true
+                                Filter: !LightShadowMapFilterTypePcf
+                                    FilterSize: Filter5x5
+                                Size: Large
+                                DepthRange: {}
+                                PartitionMode: !LightDirectionalShadowMap.PartitionLogarithmic {}
+                                ComputeTransmittance: false
+                                BiasParameters: {}
+                        Intensity: 5.0
+        -   Entity:
+                Id: 7c815bc5-d8c9-46e4-938a-c45bef1644cd
+                Name: Cube
+                Components:
+                    73b455a73014580b14240e904ec0f631: !TransformComponent
+                        Id: 02405c15-9274-4017-958e-4f8cc1c614b7
+                        Position: {X: 0.0, Y: 0.0, Z: 0.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    305f4d2d0b1bc26bf4f7dbddf2f1a730: !ModelComponent
+                        Id: 85dcc4c1-2f8c-45e3-806f-f5586ebd7e24
+                        Model: 3f8100fe-b5a1-47f3-8fe5-7242807ed651:Cube
+                        Materials: {}
+        -   Entity:
+                Id: ae943b98-0e8f-4e82-af43-01af6aa1d43d
+                Name: Skybox
+                Components:
+                    02abeb8b00fb1a59b02ab0b94bfe59c1: !TransformComponent
+                        Id: 488a25c4-a69b-4fca-89e5-c4cc81a32887
+                        Position: {X: 0.0, Y: 2.0, Z: -2.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    0301dbc750227818741235dd6b1bec53: !BackgroundComponent
+                        Id: 9b796497-88e3-45b9-8165-d16c48f275e2
+                        Texture: bc69388d-b55c-4ad2-a5b5-997359737790:Skybox texture
+                    a0b3079a214a995be6ace191a8784505: !LightComponent
+                        Id: 186381f5-e663-420c-a567-1c87b9842c46
+                        Type: !LightSkybox
+                            Skybox: 0d9577c3-c869-46c6-9b03-2e486048544f:Skybox
+        -   Entity:
+                Id: d0faef56-4249-4cbb-a2c0-71e6c03e3181
+                Name: Camera
+                Components:
+                    fdc25a2fef14169fdd5056b11f190654: !TransformComponent
+                        Id: 3c8913f2-f552-4968-b5e9-ce9136fec5ef
+                        Position: {X: 2.6, Y: 0.6, Z: -1.0}
+                        Rotation: {X: 0.0, Y: 0.829037547, Z: 0.0, W: 0.5591929}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    e5c2c1a2eb2af8997e92e29f4d089275: !CameraComponent
+                        Id: e9f02766-9351-4896-b2db-700a59d34725
+                        Name: null
+                        Projection: Perspective
+                        Slot: 6ef19078-e18f-46fd-9f87-0afdac7916e2
+                    1ee282310ac2db7a2a1ad2b9c4feda97: !HeightmapTerrain.BasicCameraController,HeightmapTerrain
+                        Id: d9848e59-8e92-4559-8909-d5f53f6d0537
+                        Gamepad: false
+                        KeyboardMovementSpeed: {X: 5.0, Y: 5.0, Z: 5.0}
+                        TouchMovementSpeed: {X: 0.7, Y: 0.7, Z: 0.3}
+                        SpeedFactor: 5.0
+                        KeyboardRotationSpeed: {X: 3.0, Y: 3.0}
+                        MouseRotationSpeed: {X: 1.0, Y: 1.0}
+                        TouchRotationSpeed: {X: 1.0, Y: 0.7}
+        -   Entity:
+                Id: da503525-d1d2-406c-a3e4-4468fd7f6a4f
+                Name: Terrain
+                Components:
+                    6b82c921cfbe9c4f7703564821b82e86: !TransformComponent
+                        Id: a3be7cbc-f047-435c-8c26-4af9563e9877
+                        Position: {X: 0.0, Y: 0.0, Z: 0.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    01f2e5a79b7fc88b0a92c47c770b9ecf: !HeightmapTerrain.Scripts.Terrain,HeightmapTerrain
+                        Id: 7cf08b1a-ca05-48a2-a648-62be71f88779
+        -   Folder: null
+            Entity:
+                Id: e161f07e-9e81-496d-b86b-28672896da90
+                Name: Cube
+                Components:
+                    73b455a73014580b14240e904ec0f631: !TransformComponent
+                        Id: 7d9d1dbc-262b-4b68-832f-5b0e79082c73
+                        Position: {X: 0.0, Y: 0.0, Z: 127.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    305f4d2d0b1bc26bf4f7dbddf2f1a730: !ModelComponent
+                        Id: c8fda596-0282-44df-824e-cab5a96a2d4e
+                        Model: 3f8100fe-b5a1-47f3-8fe5-7242807ed651:Cube
+                        Materials: {}
+        -   Folder: null
+            Entity:
+                Id: f682726a-044e-44b1-aa03-4001bb5cf9ac
+                Name: Cube
+                Components:
+                    73b455a73014580b14240e904ec0f631: !TransformComponent
+                        Id: b45c1911-ddce-4a94-b5d4-6556af2f562f
+                        Position: {X: 127.0, Y: 0.0, Z: 127.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    305f4d2d0b1bc26bf4f7dbddf2f1a730: !ModelComponent
+                        Id: 930d9756-9cb6-4da4-a76d-bfb39536f531
+                        Model: 3f8100fe-b5a1-47f3-8fe5-7242807ed651:Cube
+                        Materials: {}

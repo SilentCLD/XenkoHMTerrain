@@ -1,0 +1,31 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.0.0
+MinimumVisualStudioVersion = 16.0.0.0
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HeightmapTerrain.Windows", "HeightmapTerrain.Windows\HeightmapTerrain.Windows.csproj", "{FE95E9B7-2DF8-4552-9D46-01C3FCC98A5D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HeightmapTerrain", "HeightmapTerrain\HeightmapTerrain.csproj", "{C4E11EB3-CDAE-41EB-BC2B-498287B985C2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE95E9B7-2DF8-4552-9D46-01C3FCC98A5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE95E9B7-2DF8-4552-9D46-01C3FCC98A5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE95E9B7-2DF8-4552-9D46-01C3FCC98A5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE95E9B7-2DF8-4552-9D46-01C3FCC98A5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4E11EB3-CDAE-41EB-BC2B-498287B985C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4E11EB3-CDAE-41EB-BC2B-498287B985C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4E11EB3-CDAE-41EB-BC2B-498287B985C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4E11EB3-CDAE-41EB-BC2B-498287B985C2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {13B0262E-C522-464B-BAE7-9F43AA31AE10}
+	EndGlobalSection
+EndGlobal

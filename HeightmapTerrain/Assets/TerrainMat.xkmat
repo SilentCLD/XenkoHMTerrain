@@ -1,0 +1,13 @@
+!MaterialAsset
+Id: 51e4496e-20b7-4730-83bb-28b1de3af647
+SerializedVersion: {Xenko: 2.0.0.0}
+Tags: []
+Attributes:
+    Diffuse: !MaterialDiffuseMapFeature
+        DiffuseMap: !ComputeVertexStreamColor
+            Stream: !ColorVertexStreamDefinition {}
+    DiffuseModel: !MaterialDiffuseLambertModelFeature {}
+    Overrides:
+        UVScale: {X: 1.0, Y: 1.0}
+    CullMode: None
+Layers: {}
