@@ -5,14 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xenko.Engine" Version="3.1.0.1-SilentBuild" />
+    <PackageReference Include="Xenko.Engine" Version="3.1.0.1-beta02-0752" />
 
-    <PackageReference Include="Xenko.Video" Version="3.1.0.1-SilentBuild" />
-    <PackageReference Include="Xenko.Physics" Version="3.1.0.1-SilentBuild" />
-    <PackageReference Include="Xenko.Navigation" Version="3.1.0.1-SilentBuild" />
-    <PackageReference Include="Xenko.Particles" Version="3.1.0.1-SilentBuild" />
-    <PackageReference Include="Xenko.UI" Version="3.1.0.1-SilentBuild" />
+    <PackageReference Include="Xenko.Video" Version="3.1.0.1-beta02-0752" />
+    <PackageReference Include="Xenko.Physics" Version="3.1.0.1-beta02-0752" />
+    <PackageReference Include="Xenko.Navigation" Version="3.1.0.1-beta02-0752" />
+    <PackageReference Include="Xenko.Particles" Version="3.1.0.1-beta02-0752" />
+    <PackageReference Include="Xenko.UI" Version="3.1.0.1-beta02-0752" />
 
-    <PackageReference Include="Xenko.Core.Assets.CompilerApp" Version="3.1.0.1-SilentBuild" IncludeAssets="build;buildTransitive" />
+    <PackageReference Include="Xenko.Core.Assets.CompilerApp" Version="3.1.0.1-beta02-0752" IncludeAssets="build;buildTransitive" />
   </ItemGroup>
 </Project>
