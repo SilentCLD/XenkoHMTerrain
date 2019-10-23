@@ -17,10 +17,10 @@ namespace HeightmapTerrain.Scripts
     public class Terrain : StartupScript
     {
         // Size of the terrian (in meters)
-        private const int SIZE = 64;
+        private const int SIZE = 514;
 
         // Vertices per side
-        private const int VERTEX_COUNT = 128;
+        private const int VERTEX_COUNT = 257;
 
         // Mesh Data
         private VertexPositionNormalColor[] vertices;
@@ -83,18 +83,22 @@ namespace HeightmapTerrain.Scripts
         /// <summary>
         /// Calculates the Height of each vertex from the supplied heightmap
         /// </summary>
-        private void CalculateHeights()
+        private void CalculateHeights(Texture heightmap)
         {
-            // TODO: Calculate from heightmap
+            // Setup the array for the height information
+            Color[] heightValues = new Color[heightmap.Width * heightmap.Height];
 
-            // tmp
-            Random random = new Random();
-            for (int i = 0; i < vertices.Length; i++)
+            // Get the height information and put it in the array
+            heightmap.GetData(Game.GraphicsContext.CommandList, heightValues);
+
+            // Loop through each vertex and set its height
+            int vertexPointer = 0;
+            for (int x = 0; x < VERTEX_COUNT; x++)
             {
-                // tmp set height values
-                float height = random.Next(4, 10); ;
-
-                vertices[i].Position.Y = height;
+                for (int z = 0; z < VERTEX_COUNT; z++)
+                {
+                    vertices[vertexPointer++].Position.Y = heightValues[x + z * VERTEX_COUNT].R / 5.1f;
+                }
             }
         }
 
@@ -124,6 +128,30 @@ namespace HeightmapTerrain.Scripts
             for (int i = 0; i < vertices.Length; i++)
             {
                 vertices[i].Normal.Normalize();
+            }
+        }
+
+        /// <summary>
+        /// Calculate the mesh colours based on height.
+        /// </summary>
+        private void CalculateColours()
+        {
+            // This is probably a temporary method, will most likely pull in a terrain texture instead of this in the future
+            // Or use this as a backup?
+
+            int vertexPointer = 0;
+            for (int i = 0; i < vertices.Length; i++)
+            {
+                if (vertices[vertexPointer].Position.Y < 10)
+                    vertices[vertexPointer].Color = Color.Blue;
+                else if (vertices[vertexPointer].Position.Y < 20)
+                    vertices[vertexPointer].Color = Color.Green;
+                else if (vertices[vertexPointer].Position.Y < 40)
+                    vertices[vertexPointer].Color = Color.SaddleBrown;
+                else
+                    vertices[vertexPointer].Color = Color.White;
+
+                vertexPointer++;
             }
         }
 
@@ -172,11 +200,13 @@ namespace HeightmapTerrain.Scripts
 
         public override void Start()
         {
-            this._material = Content.Load<Material>("TerrainMat");
+            this._material = Content.Load<Material>("Materials/TerrainMat");
+            Texture heightMap = Content.Load<Texture>("Textures/Heightmap");
 
             GenerateTerrainData();
-            CalculateHeights();
+            CalculateHeights(heightMap);
             CalculateNormals();
+            CalculateColours();
             CreateMesh();
 
             // tmp
