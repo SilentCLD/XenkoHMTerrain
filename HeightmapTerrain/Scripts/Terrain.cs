@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HeightmapTerrain.Scripts.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,6 @@ using Xenko.Graphics;
 using Xenko.Input;
 using Xenko.Rendering;
 using Xenko.Rendering.Compositing;
-using HeightmapTerrain.Scripts.Utils;
 
 namespace HeightmapTerrain.Scripts
 {
@@ -48,19 +48,13 @@ namespace HeightmapTerrain.Scripts
             vertices = new VertexPositionNormalColor[_vertexCount * _vertexCount];
             indices = new int[6 * (_vertexCount - 1) * (_vertexCount - 1)];
 
-            // tmp
-            Random random = new Random();
-
             // Generate the vertex positions
             int vertexPointer = 0;
             for (int x = 0; x < _vertexCount; x++)
             {
                 for (int z = 0; z < _vertexCount; z++)
                 {
-                    vertices[vertexPointer].Position = new Vector3(x / ((float)_vertexCount - 1) * TERRAIN_SIZE, 0, z / ((float)_vertexCount - 1) * TERRAIN_SIZE);
-                    vertices[vertexPointer].Color = new Color(random.Next(2), random.Next(2), random.Next(2));
-
-                    vertexPointer++;
+                    vertices[vertexPointer++].Position = new Vector3(x / ((float)_vertexCount - 1) * TERRAIN_SIZE, 0, z / ((float)_vertexCount - 1) * TERRAIN_SIZE);
                 }
             }
 
@@ -182,7 +176,7 @@ namespace HeightmapTerrain.Scripts
                 indices,
                 GraphicsResourceUsage.Default
             );
-            
+
             _vertexBufferBinding = new VertexBufferBinding(vbo, VertexPositionNormalColor.Layout, vertices.Length);
             _indexBufferBinding = new IndexBufferBinding(ibo, is32Bit: true, count: indices.Length);
 
