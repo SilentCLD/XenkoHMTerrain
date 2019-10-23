@@ -17,10 +17,14 @@ namespace HeightmapTerrain.Scripts
     public class Terrain : StartupScript
     {
         // Size of the terrian (in meters)
-        private const int SIZE = 514;
+        public const int TERRAIN_SIZE = 514;
 
-        // Vertices per side
-        private const int VERTEX_COUNT = 257;
+        // Min / Max height of the terrain
+        public const int MAX_HEIGHT = 256;
+        public const int MIN_HEIGHT = 0;
+
+        // How many vertices are in a strip (automatically set during initialize)
+        private int _vertexCount = 100;
 
         // Mesh Data
         private VertexPositionNormalColor[] vertices;
@@ -40,19 +44,19 @@ namespace HeightmapTerrain.Scripts
         private void GenerateTerrainData()
         {
             // Setup our arrays
-            vertices = new VertexPositionNormalColor[VERTEX_COUNT * VERTEX_COUNT];
-            indices = new int[6 * (VERTEX_COUNT - 1) * (VERTEX_COUNT - 1)];
+            vertices = new VertexPositionNormalColor[_vertexCount * _vertexCount];
+            indices = new int[6 * (_vertexCount - 1) * (_vertexCount - 1)];
 
             // tmp
             Random random = new Random();
 
             // Generate the vertex positions
             int vertexPointer = 0;
-            for (int x = 0; x < VERTEX_COUNT; x++)
+            for (int x = 0; x < _vertexCount; x++)
             {
-                for (int z = 0; z < VERTEX_COUNT; z++)
+                for (int z = 0; z < _vertexCount; z++)
                 {
-                    vertices[vertexPointer].Position = new Vector3(x / ((float)VERTEX_COUNT - 1) * SIZE, 0, z / ((float)VERTEX_COUNT - 1) * SIZE);
+                    vertices[vertexPointer].Position = new Vector3(x / ((float)_vertexCount - 1) * TERRAIN_SIZE, 0, z / ((float)_vertexCount - 1) * TERRAIN_SIZE);
                     vertices[vertexPointer].Color = new Color(random.Next(2), random.Next(2), random.Next(2));
 
                     vertexPointer++;
@@ -61,14 +65,14 @@ namespace HeightmapTerrain.Scripts
 
             // Generate the indices
             int indexPointer = 0;
-            for (int x = 0; x < VERTEX_COUNT - 1; x++)
+            for (int x = 0; x < _vertexCount - 1; x++)
             {
-                for (int z = 0; z < VERTEX_COUNT - 1; z++)
+                for (int z = 0; z < _vertexCount - 1; z++)
                 {
-                    int topLeft = x + (z + 1) * VERTEX_COUNT;
-                    int topRight = x + (z + 1) * VERTEX_COUNT + 1;
-                    int bottomLeft = x + z * VERTEX_COUNT;
-                    int bottomRight = x + z * VERTEX_COUNT + 1;
+                    int topLeft = x + (z + 1) * _vertexCount;
+                    int topRight = x + (z + 1) * _vertexCount + 1;
+                    int bottomLeft = x + z * _vertexCount;
+                    int bottomRight = x + z * _vertexCount + 1;
 
                     indices[indexPointer++] = topLeft;
                     indices[indexPointer++] = bottomRight;
@@ -86,18 +90,19 @@ namespace HeightmapTerrain.Scripts
         private void CalculateHeights(Texture heightmap)
         {
             // Setup the array for the height information
-            Color[] heightValues = new Color[heightmap.Width * heightmap.Height];
+            Color[] heightValues = new Color[_vertexCount * _vertexCount];
 
             // Get the height information and put it in the array
-            heightmap.GetData(Game.GraphicsContext.CommandList, heightValues);
+            if (heightmap != null)
+                heightmap.GetData(Game.GraphicsContext.CommandList, heightValues);
 
             // Loop through each vertex and set its height
             int vertexPointer = 0;
-            for (int x = 0; x < VERTEX_COUNT; x++)
+            for (int x = 0; x < _vertexCount; x++)
             {
-                for (int z = 0; z < VERTEX_COUNT; z++)
+                for (int z = 0; z < _vertexCount; z++)
                 {
-                    vertices[vertexPointer++].Position.Y = heightValues[x + z * VERTEX_COUNT].R / 5.1f;
+                    vertices[vertexPointer++].Position.Y = heightValues[x + z * _vertexCount].R / 5.1f;
                 }
             }
         }
@@ -202,6 +207,11 @@ namespace HeightmapTerrain.Scripts
         {
             this._material = Content.Load<Material>("Materials/TerrainMat");
             Texture heightMap = Content.Load<Texture>("Textures/Heightmap");
+
+            if (heightMap == null)
+                Log.Warning("No heightmap loaded! Using default values");
+            else
+                _vertexCount = heightMap.Width;
 
             GenerateTerrainData();
             CalculateHeights(heightMap);
