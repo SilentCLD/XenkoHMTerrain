@@ -10,7 +10,20 @@ Hierarchy:
         - ref!! 3d21abd7-3ed1-445e-a9bd-bce041d9233c
         - ref!! ae943b98-0e8f-4e82-af43-01af6aa1d43d
         - ref!! da503525-d1d2-406c-a3e4-4468fd7f6a4f
+        - ref!! 3c876c21-e0c8-49b7-a0a2-8ca0e46537bf
     Parts:
+        -   Entity:
+                Id: 3c876c21-e0c8-49b7-a0a2-8ca0e46537bf
+                Name: Debuggers
+                Components:
+                    c0f3991611411b051701a841bfeeda71: !TransformComponent
+                        Id: 4086f259-7e1e-4943-b486-e71b8121b730
+                        Position: {X: 0.0, Y: 0.0, Z: 0.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children:
+                            1530ff76a11fc86c62d3df6bd4dbf262: ref!! b62d910f-7e96-43fc-b54e-94cab2be5209
+                            0fea4bdeeaff2f15a064e34957de5a83: ref!! 5cf60677-deef-45fe-b03a-bec613857649
         -   Entity:
                 Id: 3d21abd7-3ed1-445e-a9bd-bce041d9233c
                 Name: Directional light
@@ -36,6 +49,24 @@ Hierarchy:
                                 ComputeTransmittance: false
                                 BiasParameters: {}
                         Intensity: 5.0
+        -   Entity:
+                Id: 69bbb5c1-bc58-4637-ad97-6708fb82fc91
+                Name: GameProfiler
+                Components:
+                    b4e31d967145562b337881cc8177de3f: !TransformComponent
+                        Id: b62d910f-7e96-43fc-b54e-94cab2be5209
+                        Position: {X: 0.0, Y: 0.0, Z: 0.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    e7601e594651a737fa80ec0ab74b27cd: !HeightmapTerrain.Debug.GameProfiler,HeightmapTerrain
+                        Id: a2cb059b-57bf-4132-a8b9-e790a822e7aa
+                        Enabled: false
+                        TextColor: {R: 144, G: 238, B: 144, A: 255}
+                        RefreshTime: 500.0
+                        SortingMode: ByTime
+                        FilteringMode: Fps
+                        ResultPage: 1
         -   Entity:
                 Id: ae943b98-0e8f-4e82-af43-01af6aa1d43d
                 Name: Skybox
@@ -89,3 +120,15 @@ Hierarchy:
                         Children: {}
                     01f2e5a79b7fc88b0a92c47c770b9ecf: !HeightmapTerrain.Scripts.Terrain,HeightmapTerrain
                         Id: 7cf08b1a-ca05-48a2-a648-62be71f88779
+        -   Entity:
+                Id: ff997c82-5985-459b-8672-e299d1fe354b
+                Name: DebugPhysicsShapes
+                Components:
+                    db6fc61caf133b69b0e74209c2edefc6: !TransformComponent
+                        Id: 5cf60677-deef-45fe-b03a-bec613857649
+                        Position: {X: 0.0, Y: 0.0, Z: 0.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    c1b4766d0660d45fbfd9a9bd6f7c77e2: !HeightmapTerrain.Debug.DebugPhysicsShapes,HeightmapTerrain
+                        Id: b8ec9ff7-8717-42b4-a1cf-c683701da387
