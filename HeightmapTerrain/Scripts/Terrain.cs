@@ -229,5 +229,17 @@ namespace HeightmapTerrain.Scripts
             // tmp
             Game.Window.AllowUserResizing = true;
         }
+
+        /// <summary>
+        /// Cleanup on application close or scene change
+        /// </summary>
+        public override void Cancel()
+        {
+            if (_vertexBufferBinding.Buffer != null)
+                _vertexBufferBinding.Buffer.Dispose();
+
+            if (_indexBufferBinding.Buffer != null)
+                _indexBufferBinding.Buffer.Dispose();
+        }
     }
 }
