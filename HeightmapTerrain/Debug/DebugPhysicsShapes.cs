@@ -22,7 +22,8 @@ namespace HeightmapTerrain.Debug
         if (debugRenderer == null)
             return;
 
-        var shapesRenderState = new RenderStage("PhysicsDebugShapes", "Main");
+        // HACK: renamed effectSlotName 'Main' to fix Z fighting
+        var shapesRenderState = new RenderStage("PhysicsDebugShapes", "Mainn");
             compositor.RenderStages.Add(shapesRenderState);
             var meshRenderFeature = compositor.RenderFeatures.OfType<MeshRenderFeature>().First();
             meshRenderFeature.RenderStageSelectors.Add(new SimpleGroupToRenderStageSelector
