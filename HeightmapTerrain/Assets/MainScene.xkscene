@@ -132,3 +132,4 @@ Hierarchy:
                         Children: {}
                     c1b4766d0660d45fbfd9a9bd6f7c77e2: !HeightmapTerrain.Debug.DebugPhysicsShapes,HeightmapTerrain
                         Id: b8ec9ff7-8717-42b4-a1cf-c683701da387
+                        RenderGroup: Group7
