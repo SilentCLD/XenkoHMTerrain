@@ -8,6 +8,7 @@ using Xenko.Core.Mathematics;
 using Xenko.Engine;
 using Xenko.Graphics;
 using Xenko.Input;
+using Xenko.Physics;
 using Xenko.Rendering;
 using Xenko.Rendering.Compositing;
 
@@ -39,22 +40,41 @@ namespace HeightmapTerrain.Scripts
         private Mesh _mesh;
         private ModelComponent _modelComponent;
 
+        // Things for the collider
+        private StaticColliderComponent _colliderComponent;
+        private Vector3[] _colVertices;
+
+        /// <summary>
+        /// Initializes all global arrays
+        /// </summary>
+        private void InitializeGlobalArrays()
+        {
+            // Mesh
+            vertices = new VertexPositionNormalColor[_vertexCount * _vertexCount];
+            indices = new int[6 * (_vertexCount - 1) * (_vertexCount - 1)];
+
+            // Collider
+            _colVertices = new Vector3[_vertexCount * _vertexCount];
+        }
+
         /// <summary>
         /// Generates the vertex positions for the terrain
         /// </summary>
         private void GenerateTerrainData()
         {
-            // Setup our arrays
-            vertices = new VertexPositionNormalColor[_vertexCount * _vertexCount];
-            indices = new int[6 * (_vertexCount - 1) * (_vertexCount - 1)];
-
             // Generate the vertex positions
             int vertexPointer = 0;
             for (int x = 0; x < _vertexCount; x++)
             {
                 for (int z = 0; z < _vertexCount; z++)
                 {
-                    vertices[vertexPointer++].Position = new Vector3(x / ((float)_vertexCount - 1) * TERRAIN_SIZE, 0, z / ((float)_vertexCount - 1) * TERRAIN_SIZE);
+                    Vector3 pos = new Vector3(x / ((float)_vertexCount - 1) * TERRAIN_SIZE, vertices[vertexPointer].Position.Y, z / ((float)_vertexCount - 1) * TERRAIN_SIZE);
+                    vertices[vertexPointer].Position = pos;
+
+                    // We only need the position of the vertices for the collider so we'll just put it in a new array
+                    _colVertices[vertexPointer] = pos;
+
+                    vertexPointer++;
                 }
             }
 
@@ -210,6 +230,22 @@ namespace HeightmapTerrain.Scripts
             _mesh.BoundingSphere = BoundingSphere.FromBox(_mesh.BoundingBox);
         }
 
+        /// <summary>
+        /// Creates the physics collider
+        /// </summary>
+        private void CreateCollider()
+        {
+            _colliderComponent = new StaticColliderComponent();
+            var shape = new StaticMeshColliderShape(_colVertices, indices, Vector3.One);
+
+            _colliderComponent.ColliderShape = shape;
+
+            // Not sure if this is strictly necessary but can save cpu time according to the docs
+            _colliderComponent.CanSleep = true;
+
+            Entity.Add(_colliderComponent);
+        }
+
         public override void Start()
         {
             this._material = Content.Load<Material>("Materials/TerrainMat");
@@ -220,11 +256,15 @@ namespace HeightmapTerrain.Scripts
             else
                 _vertexCount = heightMap.Width;
 
-            GenerateTerrainData();
+            InitializeGlobalArrays();
+
             CalculateHeights(heightMap);
+            GenerateTerrainData();
             CalculateNormals();
             CalculateColours();
+
             CreateMesh();
+            CreateCollider();
 
             // tmp
             Game.Window.AllowUserResizing = true;
@@ -235,11 +275,8 @@ namespace HeightmapTerrain.Scripts
         /// </summary>
         public override void Cancel()
         {
-            if (_vertexBufferBinding.Buffer != null)
-                _vertexBufferBinding.Buffer.Dispose();
-
-            if (_indexBufferBinding.Buffer != null)
-                _indexBufferBinding.Buffer.Dispose();
+            _vertexBufferBinding.Buffer?.Dispose();
+            _indexBufferBinding.Buffer?.Dispose();
         }
     }
 }
