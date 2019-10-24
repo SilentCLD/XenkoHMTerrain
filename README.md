@@ -13,6 +13,13 @@ A Heightmap terrain example for the [Xenko Engine](https://xenko.com/)
 * Download / Clone the repo
 * Open `HeightmapTerrain.sln` and run **OR** launch Xenko GameStudio, import the project and run
 
+#### Controls
+
+* `WASD` - Move
+* `Right Click` - Rotate Camera
+* `Ctrl + Shift + P` - Game Profiler
+* `Ctrl + Shift + O` - Physics Debug
+
 ## Todos
 
 * Add support for heightmaps that aren't square
