@@ -1,16 +1,9 @@
 ﻿using HeightmapTerrain.Scripts.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xenko.Core.Mathematics;
 using Xenko.Engine;
 using Xenko.Graphics;
-using Xenko.Input;
 using Xenko.Physics;
 using Xenko.Rendering;
-using Xenko.Rendering.Compositing;
 
 namespace HeightmapTerrain.Scripts
 {
