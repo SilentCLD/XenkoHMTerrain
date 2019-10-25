@@ -18,7 +18,7 @@ Hierarchy:
                 Components:
                     c0f3991611411b051701a841bfeeda71: !TransformComponent
                         Id: 4086f259-7e1e-4943-b486-e71b8121b730
-                        Position: {X: 0.0, Y: 0.0, Z: 0.0}
+                        Position: {X: 0.0, Y: 0.0, Z: -3.52687883}
                         Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
                         Scale: {X: 1.0, Y: 1.0, Z: 1.0}
                         Children:
@@ -30,7 +30,7 @@ Hierarchy:
                 Components:
                     cc12e31ec53b13eb612ae25f197acfc4: !TransformComponent
                         Id: 2e70fa18-b23a-4a05-9b11-2ef434c13ba2
-                        Position: {X: 0.0, Y: 2.0, Z: 0.0}
+                        Position: {X: 0.0, Y: 2.0, Z: -6.476656}
                         Rotation: {X: 1.131334E-08, Y: -0.9659258, Z: -0.258819044, W: -4.222196E-08}
                         Scale: {X: 1.0, Y: 1.0, Z: 1.0}
                         Children: {}
@@ -118,8 +118,11 @@ Hierarchy:
                         Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
                         Scale: {X: 1.0, Y: 1.0, Z: 1.0}
                         Children: {}
-                    01f2e5a79b7fc88b0a92c47c770b9ecf: !HeightmapTerrain.Scripts.Terrain,HeightmapTerrain
-                        Id: 7cf08b1a-ca05-48a2-a648-62be71f88779
+                    8a58e754685c9eb3899331f96fc149e1: !CustomEntityComponent
+                        Id: 213b9816-6cbb-4dcc-a397-6ee27750bd6e
+                        Texture: 2cbe1fb2-6e0d-4206-8996-1c4b4b5de01e:Textures/Heightmap
+                        Material: 51e4496e-20b7-4730-83bb-28b1de3af647:Materials/TerrainMat
+                        Color: {R: 1.0, G: 1.0, B: 1.0, A: 1.0}
         -   Entity:
                 Id: ff997c82-5985-459b-8672-e299d1fe354b
                 Name: DebugPhysicsShapes

@@ -1,0 +1,18 @@
+﻿shader MyCustomShader : ShaderBase, Transformation, PositionStream4
+{
+    stream float4 col : COLOR;
+
+    stage float TextureScale;
+
+    //vertex shader
+    stage override void VSMain()
+    { 
+        streams.ShadingPosition = mul(streams.Position, WorldViewProjection);
+    }
+
+    //pixel shader
+    stage override void PSMain()
+    {
+        streams.ColorTarget = streams.col;
+    }
+};

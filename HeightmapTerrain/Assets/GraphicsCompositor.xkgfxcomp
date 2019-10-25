@@ -115,6 +115,11 @@ RenderFeatures:
                 TransparentRenderStage: ref!! 121d2605-045f-4d8b-92c3-b2e279497b84
                 EffectName: null
         PipelineProcessors: {}
+    4bd8b1c7554412d3614300f2b2a8b382*: !HeightmapTerrain.Scripts.CustomRootRenderFeature.MyRootRenderFeature,HeightmapTerrain
+        RenderStageSelectors:
+            8f2937a27a55befc126cbc0d4a33068f: !Xenko.Rendering.SimpleGroupToRenderStageSelector,Xenko.Rendering
+                RenderStage: ref!! 77699b36-94ea-4396-b632-5788b16966e9
+                EffectName: null
 SharedRenderers:
     60459475d3a3adaf2d1ba5d99913ca75: !Xenko.Rendering.Compositing.ForwardRenderer,Xenko.Engine
         Id: aba5757d-5c3b-40f7-99fb-400edaafc1e4

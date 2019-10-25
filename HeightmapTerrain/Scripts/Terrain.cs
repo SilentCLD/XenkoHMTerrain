@@ -1,9 +1,11 @@
 ﻿using HeightmapTerrain.Scripts.Utils;
+using System;
 using Xenko.Core.Mathematics;
 using Xenko.Engine;
 using Xenko.Graphics;
 using Xenko.Physics;
 using Xenko.Rendering;
+using Buffer = Xenko.Graphics.Buffer;
 
 namespace HeightmapTerrain.Scripts
 {
@@ -12,26 +14,27 @@ namespace HeightmapTerrain.Scripts
     public class Terrain : StartupScript
     {
         // Size of the terrian (in meters)
-        public const int TERRAIN_SIZE = 514;
+        public int TERRAIN_SIZE = 514;
 
         // Min / Max height of the terrain
-        public const int MAX_HEIGHT = 100;
-        public const int MIN_HEIGHT = 0;
+        public int MAX_HEIGHT = 100;
+        public int MIN_HEIGHT = 0;
 
         // How many vertices are in a strip (automatically set during initialize)
         private int _vertexCount = 100;
 
         // Mesh Data
-        private VertexPositionNormalColor[] vertices;
-        private int[] indices;
+        public VertexPositionNormalColor[] vertices;
+        public int[] indices;
 
-        private VertexBufferBinding _vertexBufferBinding;
-        private IndexBufferBinding _indexBufferBinding;
+        public VertexBufferBinding _vertexBufferBinding;
+        public IndexBufferBinding _indexBufferBinding;
 
         // Things for the model
-        private Material _material;
+        public Material _material;
         private Mesh _mesh;
         private ModelComponent _modelComponent;
+        public Texture heightMap;
 
         // Things for the collider
         private StaticColliderComponent _colliderComponent;
@@ -95,15 +98,14 @@ namespace HeightmapTerrain.Scripts
         /// <summary>
         /// Calculates the Height of each vertex from the supplied heightmap
         /// </summary>
-        private void CalculateHeights(Texture heightmap)
+        private void CalculateHeights(Texture heightmap, CommandList commandList)
         {
-            // Setup the array for the height information
             Color[] heightValues = new Color[_vertexCount * _vertexCount];
 
             // Get the height information and put it in the array
-            if (heightmap != null)
-                heightmap.GetData(Game.GraphicsContext.CommandList, heightValues);
-
+            if (heightMap != null)
+                heightMap.GetData(commandList, heightValues);
+            
             // Loop through each vertex and set its height
             int vertexPointer = 0;
             for (int x = 0; x < _vertexCount; x++)
@@ -239,6 +241,38 @@ namespace HeightmapTerrain.Scripts
             Entity.Add(_colliderComponent);
         }
 
+        public void load(Texture heightmap, Material material, RenderDrawContext context)
+        {
+            this._material = material;
+            this.heightMap = heightmap;
+
+            if (heightMap == null)
+                Log.Warning("No heightmap loaded! Using default values");
+            else
+                _vertexCount = heightMap.Width;
+
+            InitializeGlobalArrays();
+            CalculateHeights(heightmap, context.GraphicsContext.CommandList);
+            GenerateTerrainData();
+            CalculateNormals();
+            CalculateColours();
+
+            var vbo = Buffer.Vertex.New(
+                 context.GraphicsDevice,
+                 vertices,
+                 GraphicsResourceUsage.Default
+             );
+
+            var ibo = Buffer.Index.New(
+                context.GraphicsDevice,
+                indices,
+                GraphicsResourceUsage.Default
+            );
+
+            _vertexBufferBinding = new VertexBufferBinding(vbo, VertexPositionNormalColor.Layout, vertices.Length);
+            _indexBufferBinding = new IndexBufferBinding(ibo, is32Bit: true, count: indices.Length);
+        }
+
         public override void Start()
         {
             this._material = Content.Load<Material>("Materials/TerrainMat");
@@ -251,13 +285,15 @@ namespace HeightmapTerrain.Scripts
 
             InitializeGlobalArrays();
 
-            CalculateHeights(heightMap);
+            //CalculateHeights(heightMap, Game.GraphicsContext.CommandList);
             GenerateTerrainData();
             CalculateNormals();
             CalculateColours();
 
             CreateMesh();
             CreateCollider();
+
+            Log.Warning("hh");
 
             // tmp
             Game.Window.AllowUserResizing = true;
@@ -270,6 +306,9 @@ namespace HeightmapTerrain.Scripts
         {
             _vertexBufferBinding.Buffer?.Dispose();
             _indexBufferBinding.Buffer?.Dispose();
+            vertices = null;
+            indices = null;
+            _colVertices = null;
         }
     }
 }
