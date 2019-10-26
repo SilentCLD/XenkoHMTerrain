@@ -16,5 +16,4 @@ Bundles: []
 TemplateFolders: []
 RootAssets:
     - 2cbe1fb2-6e0d-4206-8996-1c4b4b5de01e:Textures/Heightmap
-    - 3f8100fe-b5a1-47f3-8fe5-7242807ed651:Cube
     - 51e4496e-20b7-4730-83bb-28b1de3af647:Materials/TerrainMat

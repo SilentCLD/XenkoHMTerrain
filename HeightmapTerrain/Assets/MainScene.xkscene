@@ -9,8 +9,8 @@ Hierarchy:
         - ref!! d0faef56-4249-4cbb-a2c0-71e6c03e3181
         - ref!! 3d21abd7-3ed1-445e-a9bd-bce041d9233c
         - ref!! ae943b98-0e8f-4e82-af43-01af6aa1d43d
-        - ref!! da503525-d1d2-406c-a3e4-4468fd7f6a4f
         - ref!! 3c876c21-e0c8-49b7-a0a2-8ca0e46537bf
+        - ref!! 7d027893-4197-4218-b1fe-06dea69311a3
     Parts:
         -   Entity:
                 Id: 3c876c21-e0c8-49b7-a0a2-8ca0e46537bf
@@ -18,7 +18,7 @@ Hierarchy:
                 Components:
                     c0f3991611411b051701a841bfeeda71: !TransformComponent
                         Id: 4086f259-7e1e-4943-b486-e71b8121b730
-                        Position: {X: 0.0, Y: 0.0, Z: 0.0}
+                        Position: {X: 0.0, Y: 0.0, Z: -2.933228}
                         Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
                         Scale: {X: 1.0, Y: 1.0, Z: 1.0}
                         Children:
@@ -68,6 +68,20 @@ Hierarchy:
                         FilteringMode: Fps
                         ResultPage: 1
         -   Entity:
+                Id: 7d027893-4197-4218-b1fe-06dea69311a3
+                Name: Terrain
+                Components:
+                    6f794a8e3c3a209e3a336220e9280e1e: !TransformComponent
+                        Id: ad7c6b6e-847d-486e-9035-831588a9b0e6
+                        Position: {X: 0.0, Y: 0.0, Z: 0.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    509c62d797fd0b787cd3837c902deea7: !ModelComponent
+                        Id: 77725838-b486-4d4a-ab67-7e3c3e7ba34c
+                        Model: 3f8100fe-b5a1-47f3-8fe5-7242807ed651:Terrain
+                        Materials: {}
+        -   Entity:
                 Id: ae943b98-0e8f-4e82-af43-01af6aa1d43d
                 Name: Skybox
                 Components:
@@ -90,7 +104,7 @@ Hierarchy:
                 Components:
                     fdc25a2fef14169fdd5056b11f190654: !TransformComponent
                         Id: 3c8913f2-f552-4968-b5e9-ce9136fec5ef
-                        Position: {X: 155.0, Y: 110.0, Z: 20.0}
+                        Position: {X: -4.338985, Y: 16.9794941, Z: -19.5935383}
                         Rotation: {X: -0.06688353, Y: -0.9285127, Z: -0.20584631, W: 0.301692039}
                         Scale: {X: 1.0, Y: 1.0, Z: 1.0}
                         Children: {}
@@ -108,18 +122,6 @@ Hierarchy:
                         KeyboardRotationSpeed: {X: 3.0, Y: 3.0}
                         MouseRotationSpeed: {X: 1.0, Y: 1.0}
                         TouchRotationSpeed: {X: 1.0, Y: 0.7}
-        -   Entity:
-                Id: da503525-d1d2-406c-a3e4-4468fd7f6a4f
-                Name: Terrain
-                Components:
-                    6b82c921cfbe9c4f7703564821b82e86: !TransformComponent
-                        Id: a3be7cbc-f047-435c-8c26-4af9563e9877
-                        Position: {X: 0.0, Y: 0.0, Z: 0.0}
-                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
-                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
-                        Children: {}
-                    01f2e5a79b7fc88b0a92c47c770b9ecf: !HeightmapTerrain.Scripts.Terrain,HeightmapTerrain
-                        Id: 7cf08b1a-ca05-48a2-a648-62be71f88779
         -   Entity:
                 Id: ff997c82-5985-459b-8672-e299d1fe354b
                 Name: DebugPhysicsShapes

@@ -4,8 +4,8 @@ SerializedVersion: {Xenko: 2.0.0.0}
 Tags: []
 Attributes:
     Diffuse: !MaterialDiffuseMapFeature
-        DiffuseMap: !ComputeVertexStreamColor
-            Stream: !ColorVertexStreamDefinition {}
+        DiffuseMap: !ComputeColor
+            Value: {R: 0.07909687, G: 0.16592364, B: 0.57525, A: 1.0}
     DiffuseModel: !MaterialDiffuseLambertModelFeature {}
     Overrides:
         UVScale: {X: 1.0, Y: 1.0}
