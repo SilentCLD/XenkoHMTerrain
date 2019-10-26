@@ -19,7 +19,6 @@ namespace Xenko.Graphics.GeometricPrimitives
                 bool useRandomHeight = false;
                 int vertexCount = 100;
                 Color[] heightValues = new Color[vertexCount * vertexCount];
-                heightmap.Recreate();
 
                 if (heightmap != null)
                 {
